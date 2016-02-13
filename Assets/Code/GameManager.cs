@@ -4,7 +4,8 @@ using System.Collections;
 public class GameManager : MonoBehaviour {
 
     [SerializeField]
-    LayerMask dayLightsMask; 
+    LayerMask dayLightsMask;
+    bool _lightsOn = true; 
 
     public void TurnOutTheLights()
     {
@@ -41,6 +42,22 @@ public class GameManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-	
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            ToggleLights(); 
+        }
 	}
+
+    void ToggleLights()
+    {
+        if (_lightsOn)
+        {
+            TurnOutTheLights();
+        }
+        else
+        {
+            TurnOnTheLights();
+        }
+        _lightsOn = !_lightsOn; 
+    }
 }
