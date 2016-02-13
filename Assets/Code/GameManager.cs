@@ -3,41 +3,54 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 
+    bool _lightsOn = true;
     [SerializeField]
-    LayerMask dayLightsMask;
-    bool _lightsOn = true; 
+    Material _blackMaterial;
+    static Material sBlackMaterial; 
+    public static Material blackMaterial { get { return sBlackMaterial; } }
+
+    public void AddHolders()
+    {
+        Renderer[] _meshes = FindObjectsOfType<Renderer>();
+        foreach (Renderer _mesh in _meshes)
+        {
+            if (_mesh.CompareTag("env"))
+            {
+                _mesh.gameObject.AddComponent<MaterialHolder>();
+            }
+        }
+    }
 
     public void TurnOutTheLights()
     {
-        //Mesh[] _meshes = FindObjectsOfType<Mesh>();  
-        Light[] _lights = FindObjectsOfType<Light>();
-        for(int i = 0; i < _lights.Length; i++)
+        Camera.main.clearFlags = CameraClearFlags.SolidColor; 
+        Renderer[] _meshes = FindObjectsOfType<Renderer>();
+        foreach (Renderer _mesh in _meshes)
         {
-            Light _light = _lights[i];
-            if ((dayLightsMask.value & 1 << _light.gameObject.layer) != 0)
+            if (_mesh.CompareTag("env"))
             {
-                _lights[i].enabled = false;
+                _mesh.GetComponent<MaterialHolder>().SetToBlack();
             }
         }
     }
 
     public void TurnOnTheLights()
     {
-        Light[] _lights = FindObjectsOfType<Light>(); 
-        for(int i = 0; i < _lights.Length; i++)
+        Camera.main.clearFlags = CameraClearFlags.Skybox; 
+        Renderer[] _meshes = FindObjectsOfType<Renderer>();
+        foreach (Renderer _mesh in _meshes)
         {
-            Light _light = _lights[i]; 
-            if((dayLightsMask.value & 1<<_light.gameObject.layer) != 0)
+            if (_mesh.CompareTag("env"))
             {
-                Debug.Log(_light.name); 
-                _light.enabled = true;
+                _mesh.GetComponent<MaterialHolder>().SetToOriginal(); 
             }
         }
     }
 
 	// Use this for initialization
 	void Start () {
-        
+        sBlackMaterial = _blackMaterial;
+        AddHolders(); 
 	}
 
 	// Update is called once per frame
