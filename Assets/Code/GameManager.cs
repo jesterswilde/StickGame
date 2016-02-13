@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+
 	// Use this for initialization
 	void Start () {
         sBlackMaterial = _blackMaterial;
