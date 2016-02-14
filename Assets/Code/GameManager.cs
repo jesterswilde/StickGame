@@ -14,9 +14,45 @@ public class GameManager : MonoBehaviour {
     int _currentObjective = 0;
     [SerializeField]
     GameObject _home;
+    bool _hasGivenUp; 
     public static GameObject home; 
     public static GameManager gm;
     public static Transform playerTrans;
+
+    public void GiveUp()
+    {
+        Objective _objective = _objectives[_currentObjective];
+        if (!_objective.UsesLights())
+        {
+            TurnOnTheLights(); 
+            UIStuff.t.AddMessage("I give up, I'm just going to freeze here until morning."); 
+            _hasGivenUp = true;
+            _objective.Deactivate();
+            UIStuff.t.StartFadeFromBlack(); 
+            while (!_objectives[_currentObjective].UsesLights())
+            {
+                _currentObjective--; 
+            }
+        }
+    }
+
+    public void HomeAfterGivingUp()
+    {
+        if (_hasGivenUp)
+        {
+            UIStuff.t.AddMessage("Well, that was a miserable night. So good to be home."); 
+            _hasGivenUp = false;
+            _objectives[_currentObjective].StartObjective(); 
+        }
+    }
+
+    void CheckForGivingUp()
+    {
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            GiveUp(); 
+        }
+    }
 
     public void Respawn(bool rollback)
     {
@@ -95,6 +131,7 @@ public class GameManager : MonoBehaviour {
         {
             ToggleLights(); 
         }
+        CheckForGivingUp();
 	}
 
     void CheckRespawn()

@@ -16,6 +16,11 @@ public class Objective : MonoBehaviour {
     bool _lightsOn = true;
     GameObject _startingPos; 
 
+    public bool UsesLights()
+    {
+        return _lightsOn; 
+    }
+
     public void StartObjective()
     {
         if(_startText != null)
@@ -35,7 +40,7 @@ public class Objective : MonoBehaviour {
                 _startingPos.transform.position = GameManager.playerTrans.position;
                 _startingPos.transform.rotation = GameManager.playerTrans.rotation;
             }
-            GameManager.gm.TurnOutTheLights(); 
+            UIStuff.t.StartFadeToBlack(); 
         }
         foreach(Target _target in _targets)
         {
