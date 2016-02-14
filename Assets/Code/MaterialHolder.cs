@@ -8,12 +8,18 @@ public class MaterialHolder : MonoBehaviour {
 
     public void SetToOriginal()
     {
-        _renderer.material = _startMaterial; 
+        if(_renderer != null)
+        {
+            _renderer.material = _startMaterial; 
+        }
     }
 
     public void SetToBlack()
     {
-        _renderer.material = GameManager.blackMaterial; 
+        if(_renderer != null)
+        {
+            _renderer.material = GameManager.blackMaterial; 
+        }
     }
 
 	// Use this for initialization

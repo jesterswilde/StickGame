@@ -65,8 +65,12 @@ public class UIStuff : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         HideMessage(); 
-        t = this; 
 	}
+
+    void Awake()
+    {
+        t = this; 
+    }
 	
 	// Update is called once per frame
 	void Update () {
