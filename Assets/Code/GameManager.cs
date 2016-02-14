@@ -14,10 +14,15 @@ public class GameManager : MonoBehaviour {
     int _currentObjective = 0;
     [SerializeField]
     GameObject _home;
+    [SerializeField]
+    Material _daySkybox;
+    [SerializeField]
+    Material _nightSkybox; 
     bool _hasGivenUp; 
     public static GameObject home; 
     public static GameManager gm;
     public static Transform playerTrans;
+
 
     public void GiveUp()
     {
@@ -87,7 +92,8 @@ public class GameManager : MonoBehaviour {
 
     public void TurnOutTheLights()
     {
-        Camera.main.clearFlags = CameraClearFlags.SolidColor; 
+        //Camera.main.clearFlags = CameraClearFlags.SolidColor; 
+        RenderSettings.skybox = _nightSkybox; 
         Renderer[] _meshes = FindObjectsOfType<Renderer>();
         foreach (Renderer _mesh in _meshes)
         {
@@ -100,7 +106,8 @@ public class GameManager : MonoBehaviour {
 
     public void TurnOnTheLights()
     {
-        Camera.main.clearFlags = CameraClearFlags.Skybox; 
+        //Camera.main.clearFlags = CameraClearFlags.Skybox; 
+        RenderSettings.skybox = _daySkybox; 
         Renderer[] _meshes = FindObjectsOfType<Renderer>();
         foreach (Renderer _mesh in _meshes)
         {

@@ -19,19 +19,19 @@ public class Stick : MonoBehaviour {
         CheckForAnimationEnd(); 
 	}
 
-    void StartSwing()
+    void StartSwing(string _swing)
     {
         if (!isActive())
         {
             _normalizedTime = 0; 
             _canPlaySound = true;
-            _anim.SetBool("verticalSwing", true);
+            _anim.SetBool(_swing , true);
         }
     }
 
-    void EndSwing()
+    void EndSwing(string _swing)
     {
-        _anim.SetBool("verticalSwing", false); 
+        _anim.SetBool(_swing , false); 
     }
 
     void Whacked(Collision _coll)
@@ -51,12 +51,20 @@ public class Stick : MonoBehaviour {
     {
         if (Input.GetMouseButtonDown(0))
         {
-            StartSwing(); 
- 
+            StartSwing("horizontalSwing"); 
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            StartSwing("verticalSwing"); 
+
         }
         if (Input.GetMouseButtonUp(0))
         {
-            EndSwing(); 
+            EndSwing("horizontalSwing"); 
+        }
+        if (Input.GetMouseButtonUp(1))
+        {
+            EndSwing("verticalSwing");
         }
     }
 
