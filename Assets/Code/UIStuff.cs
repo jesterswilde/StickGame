@@ -65,10 +65,6 @@ public class UIStuff : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         HideMessage(); 
-        _textQueue.Enqueue("what");
-        _textQueue.Enqueue("uh");
-        _textQueue.Enqueue("wlej");
-        Invoke("ShowMessage", 2f);
         t = this; 
 	}
 	

@@ -81,7 +81,10 @@ public class GameManager : MonoBehaviour {
         sBlackMaterial = _blackMaterial;
         AddHolders();
         gm = this;
-        _objectives[0].StartObjective();
+        if(_objectives.Length > 0)
+        {
+            _objectives[0].StartObjective();
+        }
         playerTrans = FindObjectOfType<CharacterController>().gameObject.transform;
         home = _home; 
     }
