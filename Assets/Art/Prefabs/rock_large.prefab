@@ -11,6 +11,7 @@ GameObject:
   - 33: {fileID: 3338700}
   - 23: {fileID: 2329176}
   - 114: {fileID: 11405874}
+  - 64: {fileID: 6435752}
   m_Layer: 0
   m_Name: rock_large
   m_TagString: env
@@ -24,9 +25,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 169486}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -14.67169, y: 49.754314, z: -17.938221}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
+  m_LocalRotation: {x: -0.44923314, y: -0.5460675, z: -0.54606736, w: 0.44923308}
+  m_LocalPosition: {x: -8.420713, y: 54.89403, z: 60.701008}
+  m_LocalScale: {x: 2.4999998, y: 2.5000002, z: 1.95796}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -62,6 +63,18 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 169486}
+  m_Mesh: {fileID: 4300000, guid: b023cf0d73f2789499fe5b3c2628c848, type: 3}
+--- !u!64 &6435752
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 169486}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
   m_Mesh: {fileID: 4300000, guid: b023cf0d73f2789499fe5b3c2628c848, type: 3}
 --- !u!114 &11405874
 MonoBehaviour:
