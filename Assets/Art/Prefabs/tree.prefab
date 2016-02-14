@@ -12,7 +12,7 @@ GameObject:
   - 23: {fileID: 2317104}
   m_Layer: 0
   m_Name: tree_branches
-  m_TagString: Untagged
+  m_TagString: env
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25,10 +25,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 441176}
-  - 114: {fileID: 11404712}
   m_Layer: 0
   m_Name: tree
-  m_TagString: Untagged
+  m_TagString: env
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,9 +43,10 @@ GameObject:
   - 33: {fileID: 3369998}
   - 23: {fileID: 2356218}
   - 136: {fileID: 13601586}
+  - 114: {fileID: 11476862}
   m_Layer: 0
   m_Name: tree
-  m_TagString: Untagged
+  m_TagString: env
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -57,9 +57,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 161858}
-  m_LocalRotation: {x: -0.01933448, y: 0.9053343, z: -0.032883134, w: 0.42298326}
-  m_LocalPosition: {x: 22.82, y: 54.77, z: -20.33}
-  m_LocalScale: {x: 2.5000067, y: 2.5000024, z: 2.5000076}
+  m_LocalRotation: {x: -0.048703182, y: 0.89445364, z: 0.038904548, w: 0.44279483}
+  m_LocalPosition: {x: 0.09, y: 54.71, z: -3.62}
+  m_LocalScale: {x: 2.5000048, y: 2.5000017, z: 2.5000052}
   m_Children:
   - {fileID: 444696}
   - {fileID: 477872}
@@ -155,12 +155,12 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 182370}
   m_Mesh: {fileID: 4300000, guid: e39bd0439333df1478a736ee82578625, type: 3}
---- !u!114 &11404712
+--- !u!114 &11476862
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 161858}
+  m_GameObject: {fileID: 182370}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e1b1c3ff1c56df4e9c99aa800b72b6e, type: 3}
@@ -187,7 +187,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: env
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 161858}
