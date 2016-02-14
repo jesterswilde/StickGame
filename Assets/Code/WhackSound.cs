@@ -20,6 +20,7 @@ public class WhackSound : MonoBehaviour {
         AudioSource _as = _go.AddComponent<AudioSource>();
         _go.AddComponent<DestroyAfterAudio>(); 
         _as.clip = _whackSound;
+        _as.spatialBlend = 1; 
         _as.Play();
         _go.transform.position = _pos;
         return _go; 
