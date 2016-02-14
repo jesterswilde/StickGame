@@ -8,6 +8,34 @@ public class GameManager : MonoBehaviour {
     Material _blackMaterial;
     static Material sBlackMaterial; 
     public static Material blackMaterial { get { return sBlackMaterial; } }
+    [SerializeField]
+    Objective[] _objectives;
+    [SerializeField]
+    int _currentObjective = 0;
+    [SerializeField]
+    GameObject _home;
+    public static GameObject home; 
+    public static GameManager gm;
+    public static Transform playerTrans;
+
+    public void Respawn(bool rollback)
+    {
+        if(rollback)
+        {
+            _objectives[_currentObjective].Deactivate();
+            _currentObjective--; 
+        }
+        _objectives[_currentObjective].Respawn(); 
+    }
+
+    public void CompleteObjective()
+    {
+        _currentObjective++; 
+        if(_currentObjective < _objectives.Length)
+        {
+            _objectives[_currentObjective].StartObjective(); 
+        }
+    }
 
     public void AddHolders()
     {
@@ -51,8 +79,12 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         sBlackMaterial = _blackMaterial;
-        AddHolders(); 
-	}
+        AddHolders();
+        gm = this;
+        _objectives[0].StartObjective();
+        playerTrans = FindObjectOfType<CharacterController>().gameObject.transform;
+        home = _home; 
+    }
 
 	// Update is called once per frame
 	void Update () {
@@ -61,6 +93,18 @@ public class GameManager : MonoBehaviour {
             ToggleLights(); 
         }
 	}
+
+    void CheckRespawn()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Respawn(false);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            Respawn(true); 
+        }
+    }
 
     void ToggleLights()
     {

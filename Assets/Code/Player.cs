@@ -3,84 +3,46 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
-    Animator _anim;
-    bool _canPlaySound = false;
-    bool _holdingLeft = false;
-    float _normalizedTime = 0; 
+    CharacterController _char;
+    GameObject _currentGround;
+    [SerializeField]
+    LayerMask groundMask;
+    UnityStandardAssets.Characters.FirstPerson.FirstPersonController _controller;
+    static Player _player; 
+
+    public static void SetPosition(Transform _trans)
+    {
+        _player.transform.position = _trans.position;
+        _player.transform.rotation = _trans.rotation; 
+    }
 
 	// Use this for initialization
 	void Start () {
-        _anim = GetComponent<Animator>(); 
-	}
+        _char = GetComponent<CharacterController>();
+        _controller = GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        CheckClicks();
-        CheckForAnimationEnd(); 
+        GetGround(); 
 	}
 
-    void StartSwing()
+    void GetGround()
     {
-        if (!isActive())
+        if (_char.isGrounded)
         {
-            _normalizedTime = 0; 
-            _canPlaySound = true;
-            _anim.SetBool("verticalSwing", true);
-        }
-    }
-
-    void EndSwing()
-    {
-        _anim.SetBool("verticalSwing", false); 
-    }
-
-    void Whacked(Collision _coll)
-    {
-        GameObject _go = _coll.gameObject;
-        WhackSound _whack = _go.GetComponent<WhackSound>();
-        if (_whack != null && _canPlaySound)
-        {
-            _normalizedTime = Mathf.Ceil(_anim.GetCurrentAnimatorStateInfo(0).normalizedTime); 
-            _canPlaySound = false; 
-            _whack.Whacked(_coll.contacts[0].point);
-            _anim.Play(_anim.GetCurrentAnimatorClipInfo(0)[0].clip.name); 
-        } 
-    }
-
-    void CheckClicks()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            StartSwing(); 
- 
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            EndSwing(); 
-        }
-    }
-
-    void CheckForAnimationEnd()
-    {
-        if(!_canPlaySound)
-        {
-            float _currentTime = _anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
-            if(_currentTime > _normalizedTime)
+            Ray _ray = new Ray(transform.position, Vector3.down);
+            RaycastHit _hit;
+            if(Physics.Raycast(_ray, out _hit, 100, groundMask))
             {
-                _canPlaySound = true; 
+                GameObject _go = _hit.collider.gameObject;
+                WhackSound _whack = _go.GetComponent<WhackSound>(); 
+                if(_whack != null)
+                {
+                    AudioClip[] _audioArray = new AudioClip[] { _whack.stepSound };
+                    _controller.SetFootsteps(_audioArray); 
+                }
             }
         }
-    }
-
-    void OnCollisionEnter(Collision _coll)
-    {
-        if (isActive())
-        {
-            Whacked(_coll); 
-        }
-    }
-    bool isActive()
-    {
-        return _anim.GetCurrentAnimatorStateInfo(0).IsTag("active"); 
     }
 }
