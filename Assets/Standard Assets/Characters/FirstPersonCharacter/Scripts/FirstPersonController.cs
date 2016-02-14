@@ -42,6 +42,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jumping;
         private AudioSource m_AudioSource;
 
+        public void SetFootsteps(AudioClip[] _audio)
+        {
+            m_FootstepSounds = _audio; 
+        }
+
         // Use this for initialization
         private void Start()
         {
@@ -168,7 +173,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             // pick & play a random footstep sound from the array,
             // excluding sound at index 0
-            int n = Random.Range(1, m_FootstepSounds.Length);
+            int n = Random.Range(0, m_FootstepSounds.Length);
+            Debug.Log(m_FootstepSounds.Length + " | " + n); 
             m_AudioSource.clip = m_FootstepSounds[n];
             m_AudioSource.PlayOneShot(m_AudioSource.clip);
             // move picked sound to index 0 so it's not picked next time
